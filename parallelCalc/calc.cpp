@@ -297,6 +297,7 @@ int callHadoop(const std::string& tempInputName,
     // copy results file to output
     ifstream ifs(tempOutputName.c_str());
     output << ifs.rdbuf();
+    ifs.close();
     
     return 0;
 }
