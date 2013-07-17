@@ -24,7 +24,7 @@
 
 #ifndef USE_THREADS
 
-#if __cplusplus >= 201103L && defined(_LIBCPP_VERSION)  // XCode on Mac OS X 10.6 and 10.7
+#if __cplusplus >= 201103L && defined(_LIBCPP_VERSION)  // XCode on Mac OS X 10.7
 #define USE_THREADS 1
 
 #elif defined(_MSC_VER) && _MSC_VER >= 1700     // Visual Studio Express 2012 on Windows 7
