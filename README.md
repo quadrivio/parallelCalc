@@ -9,7 +9,7 @@ calculations handled by 1) a single-threaded process, 2) a multi-threaded proces
 3) streaming Hadoop. It is intended as example code for those who plan on modifying
 it for their own purposes.
 
-The project was developed for Mac OS X using XCode. The files compile and run under Visual
+The project was developed for Mac OS X 10.7 using XCode. The files compile and run under Visual
 Studio on Windows 7 and Eclipse on CentOS 6.4, as well, but have not been fully tested and
 are still in progress on those platforms.
 
@@ -45,32 +45,40 @@ To run via multiple threads, use `parallelCalc -n <nrows> -threads <nthreads>`
 
 These options and others can also be run directly from XCode. At the top of the XCode
 window, click parallelCalc and select Edit Scheme. Select Run parallelCalc at the left of
-the dialog box and then choose the desired options in the box labeled, "Arguments
+the dialog box and then enter the desired options in the box labeled, "Arguments
 Passed On launch."
 
 ### Development Environments
 
+```
 Max OS 10.6 
 XCode 4.2
 c++0x with libstdc++
 Hadoop 1.1.2
 (no multi-threading) 
+```
 
+```
 Mac OS X 10.7
 XCode 4.6
 c++0x with libc++
 Hadoop 1.1.2
+```
 
 Work in progress:
 
+```
 Windows 7
 Visual Studio C/C++ Express 2012
 (no Hadoop used)
+```
 
+```
 CentOS 6.4
 gcc 4.4
 Eclipse Kepler
 Hadoop 1.1.2
+```
 
 ### License
 
