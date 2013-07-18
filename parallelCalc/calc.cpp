@@ -219,12 +219,12 @@ int Calc::hadoop(int nrows, std::ostream& output)
     startWorker(nrows, ofs);
     ofs.close();
     
-    callHadoop(tempInputName, name(), verbose, output);
+    int result = callHadoop(tempInputName, name(), verbose, output);
     
     // delete temp file
     remove(tempInputName.c_str());    
     
-    return 0;
+    return result;
 }
 
 // override to split map and reduce calculations over multiple threads
@@ -242,6 +242,8 @@ int callHadoop(const std::string& tempInputName,
                bool verbose,
                std::ostream& output)
 {
+    int result = 0;
+    
     char *hadoopInstallC = getenv("HADOOP_INSTALL");
     
     RUNTIME_ERROR_IF(hadoopInstallC == NULL, "undefined environment variable HADOOP_INSTALL");
@@ -253,20 +255,33 @@ int callHadoop(const std::string& tempInputName,
     string stderrStr;
     
     // make input directory
-    callTool("hadoop", hadoopPath, stdoutStr, stderrStr, verbose,
-             "dfs", "-mkdir", (dirPrefix + "Input").c_str(), NULL);
+    if (result == 0) {
+        // ignore failure - directory might already exist
+        callTool("hadoop", hadoopPath, stdoutStr, stderrStr, verbose,
+                 "dfs", "-mkdir", (dirPrefix + "Input").c_str(), NULL);
+    }
     
     // remove previous input file (if any)
-    callTool("hadoop", hadoopPath, stdoutStr, stderrStr, verbose,
-             "dfs", "-rm", (dirPrefix + "Input/input.txt").c_str(), NULL);
+    if (result == 0) {
+        // ignore failure - previous input file might not exist
+        callTool("hadoop", hadoopPath, stdoutStr, stderrStr, verbose,
+                 "dfs", "-rm", (dirPrefix + "Input/input.txt").c_str(), NULL);
+    }
     
     // write new input file
-    callTool("hadoop", hadoopPath, stdoutStr, stderrStr, verbose,
-             "dfs", "-put", tempInputName.c_str(), (dirPrefix + "Input/input.txt").c_str(), NULL);
+    if (result == 0) {
+        // must succeed to continue
+        result = callTool("hadoop", hadoopPath, stdoutStr, stderrStr, verbose,
+                          "dfs", "-put", tempInputName.c_str(),
+                          (dirPrefix + "Input/input.txt").c_str(), NULL);
+    }
     
     // remove previous hdfs output directory (if any)
-    callTool("hadoop", hadoopPath, stdoutStr, stderrStr, verbose,
-             "dfs", "-rmr", (dirPrefix + "Output").c_str(), NULL);
+    if (result == 0) {
+        // ignore failure - previous output directory might not exist
+        callTool("hadoop", hadoopPath, stdoutStr, stderrStr, verbose,
+                 "dfs", "-rmr", (dirPrefix + "Output").c_str(), NULL);
+    }
     
     // run hadoop calculation
     string jarPath = hadoopInstall + "/contrib/streaming/hadoop-streaming-1.1.2.jar";
@@ -287,31 +302,42 @@ int callHadoop(const std::string& tempInputName,
     string mapperCmd = quote + gToolName + " -map" + quote;
     string reducerCmd = quote + gToolName + " -reduce" + quote;
     
-    callTool("hadoop", hadoopPath, stdoutStr, stderrStr, verbose,
-             "jar",
-             jarPath.c_str(),
-             "-input",
-             (dirPrefix + "Input").c_str(),
-             "-output",
-             (dirPrefix + "Output").c_str(),
-             "-mapper",
-             mapperCmd.c_str(),
-             "-reducer",
-             reducerCmd.c_str(),
-             "-file",
-             toolPath.c_str(),
-             NULL);
+    if (result == 0) {
+        // must succeed to continue
+        result = callTool("hadoop", hadoopPath, stdoutStr, stderrStr, verbose,
+                          "jar",
+                          jarPath.c_str(),
+                          "-input",
+                          (dirPrefix + "Input").c_str(),
+                          "-output",
+                          (dirPrefix + "Output").c_str(),
+                          "-mapper",
+                          mapperCmd.c_str(),
+                          "-reducer",
+                          reducerCmd.c_str(),
+                          "-file",
+                          toolPath.c_str(),
+                          NULL);
+    }
 
     // copy results to local file
     string tempOutputName = tmpnam(NULL);
-    callTool("hadoop", hadoopPath, stdoutStr, stderrStr, verbose,
-             "dfs", "-get", (dirPrefix + "Output/part-00000").c_str(), tempOutputName.c_str(),
-             NULL);
+    if (result == 0) {
+        // must succeed to continue
+        result = callTool("hadoop", hadoopPath, stdoutStr, stderrStr, verbose,
+                          "dfs", "-get", (dirPrefix + "Output/part-00000").c_str(),
+                          tempOutputName.c_str(), NULL);
+    }
     
     // copy results file to output
-    ifstream ifs(tempOutputName.c_str());
-    output << ifs.rdbuf();
-    ifs.close();
+    if (result == 0) {
+        ifstream ifs(tempOutputName.c_str());
+        output << ifs.rdbuf();
+        ifs.close();
+        
+        // clean up temp file
+        remove(tempOutputName.c_str());
+    }
     
-    return 0;
+    return result;
 }

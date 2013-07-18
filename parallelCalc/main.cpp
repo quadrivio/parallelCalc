@@ -179,6 +179,7 @@ int main (int argc, const char * argv[])
             status = calc->singleThreadWorkers(nrows, cout);
 
             long long endTime = millisecondTime();
+            cerr << (status ? "FAILURE " : "OK ");
             cerr << fixed << setprecision(3) << 0.001 * (endTime - startTime) << " seconds" << endl;
 
         } else if (forkFlag) {
@@ -187,6 +188,7 @@ int main (int argc, const char * argv[])
             status = calc->forkWorkers(nrows, cout);
             
             long long endTime = millisecondTime();
+            cerr << (status ? "FAILURE " : "OK ");
             cerr << fixed << setprecision(3) << 0.001 * (endTime - startTime) << " seconds" << endl;
             
         } else if (hadoopFlag) {
@@ -195,6 +197,7 @@ int main (int argc, const char * argv[])
             status = calc->hadoop(nrows, cout);
             
             long long endTime = millisecondTime();
+            cerr << (status ? "FAILURE " : "OK ");
             cerr << fixed << setprecision(3) << 0.001 * (endTime - startTime) << " seconds" << endl;
             
         } else if (threadsFlag) {
@@ -209,6 +212,7 @@ int main (int argc, const char * argv[])
             }
             
             long long endTime = millisecondTime();
+            cerr << (status ? "FAILURE " : "OK ");
             cerr << fixed << setprecision(3) << 0.001 * (endTime - startTime) << " seconds" << endl;
             
         } else if (startFlag) {

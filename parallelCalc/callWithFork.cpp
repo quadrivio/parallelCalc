@@ -18,6 +18,7 @@
 #include "callWithFork.h"
 
 #if !WINDOWS
+#include <errno.h>
 #include <unistd.h>
 #include <sys/wait.h>
 #endif
@@ -149,7 +150,11 @@ int forkPipeWait(const std::string& path, std::vector<std::string> args, std::is
             
             // done
             int status;
-            waitpid(pid, &status, 0);
+            int wpe;
+            do {
+                wpe = waitpid(pid, &status, 0);
+                
+            } while (wpe < 0 && errno == EINTR);    // intermittently true
             
             if (WIFEXITED(status)) {
                 if (WEXITSTATUS(status) == 0) {
@@ -157,6 +162,8 @@ int forkPipeWait(const std::string& path, std::vector<std::string> args, std::is
                     
                 } else {
                     error << "  WEXITSTATUS = " << WEXITSTATUS(status);
+                    error << "  waitpid = " << wpe;
+                    error << "  errno = " << errno;
                 }
                 
             } else if (WIFSIGNALED(status)) {
