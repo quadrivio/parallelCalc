@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4C125EC0178637AE006F7CFA /* sumSquare.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C125EBF178637AE006F7CFA /* sumSquare.cpp */; };
 		4C125EC3178637C8006F7CFA /* callWithFork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C125EC2178637C8006F7CFA /* callWithFork.cpp */; };
-		4C125EC517863BA2006F7CFA /* parallelCalc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C5457141785E91B00867613 /* parallelCalc */; };
+		4C125EC517863BA2006F7CFA /* parallelCalcn in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C5457141785E91B00867613 /* parallelCalcn */; };
 		4C327B4F17879E010073EBC7 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C327B4D17879E010073EBC7 /* utils.cpp */; };
 		4C5457181785E91B00867613 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5457171785E91B00867613 /* main.cpp */; };
 		4CD53A171797105B00F9DCF0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5457171785E91B00867613 /* main.cpp */; };
@@ -17,7 +17,7 @@
 		4CD53A191797105B00F9DCF0 /* callWithFork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C125EC2178637C8006F7CFA /* callWithFork.cpp */; };
 		4CD53A1A1797105B00F9DCF0 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C327B4D17879E010073EBC7 /* utils.cpp */; };
 		4CD53A1B1797105B00F9DCF0 /* calc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE42BE8178C5D9F0066C899 /* calc.cpp */; };
-		4CD53A1E1797105B00F9DCF0 /* parallelCalc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C5457141785E91B00867613 /* parallelCalc */; };
+		4CD53A1E1797105B00F9DCF0 /* parallelCalcn in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C5457141785E91B00867613 /* parallelCalcn */; };
 		4CE42BE9178C5D9F0066C899 /* calc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE42BE8178C5D9F0066C899 /* calc.cpp */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +28,7 @@
 			dstPath = $PROJECT_DIR/bin;
 			dstSubfolderSpec = 0;
 			files = (
-				4C125EC517863BA2006F7CFA /* parallelCalc in CopyFiles */,
+				4C125EC517863BA2006F7CFA /* parallelCalcn in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,7 +38,7 @@
 			dstPath = $PROJECT_DIR/bin;
 			dstSubfolderSpec = 0;
 			files = (
-				4CD53A1E1797105B00F9DCF0 /* parallelCalc in CopyFiles */,
+				4CD53A1E1797105B00F9DCF0 /* parallelCalcn in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,9 +52,9 @@
 		4C125EC41786388F006F7CFA /* shim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shim.h; sourceTree = "<group>"; };
 		4C327B4D17879E010073EBC7 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
 		4C327B4E17879E010073EBC7 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
-		4C5457141785E91B00867613 /* parallelCalc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = parallelCalc; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C5457141785E91B00867613 /* parallelCalcn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = parallelCalcn; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C5457171785E91B00867613 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		4CD53A221797105B00F9DCF0 /* parallelCalc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = parallelCalc; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CD53A221797105B00F9DCF0 /* parallelCalct */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = parallelCalct; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CE42BE6178C5D910066C899 /* calc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calc.h; sourceTree = "<group>"; };
 		4CE42BE8178C5D9F0066C899 /* calc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = calc.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,8 +88,8 @@
 		4C5457151785E91B00867613 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4C5457141785E91B00867613 /* parallelCalc */,
-				4CD53A221797105B00F9DCF0 /* parallelCalc */,
+				4C5457141785E91B00867613 /* parallelCalcn */,
+				4CD53A221797105B00F9DCF0 /* parallelCalct */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,9 +114,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4C5457131785E91B00867613 /* parallelCalc 10.6 */ = {
+		4C5457131785E91B00867613 /* parallelCalcn 10.6 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4C54571D1785E91B00867613 /* Build configuration list for PBXNativeTarget "parallelCalc 10.6" */;
+			buildConfigurationList = 4C54571D1785E91B00867613 /* Build configuration list for PBXNativeTarget "parallelCalcn 10.6" */;
 			buildPhases = (
 				4C5457101785E91B00867613 /* Sources */,
 				4C5457111785E91B00867613 /* Frameworks */,
@@ -126,14 +126,14 @@
 			);
 			dependencies = (
 			);
-			name = "parallelCalc 10.6";
+			name = "parallelCalcn 10.6";
 			productName = parallelCalc;
-			productReference = 4C5457141785E91B00867613 /* parallelCalc */;
+			productReference = 4C5457141785E91B00867613 /* parallelCalcn */;
 			productType = "com.apple.product-type.tool";
 		};
-		4CD53A151797105B00F9DCF0 /* parallelCalc 10.7 */ = {
+		4CD53A151797105B00F9DCF0 /* parallelCalct 10.7 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4CD53A1F1797105B00F9DCF0 /* Build configuration list for PBXNativeTarget "parallelCalc 10.7" */;
+			buildConfigurationList = 4CD53A1F1797105B00F9DCF0 /* Build configuration list for PBXNativeTarget "parallelCalct 10.7" */;
 			buildPhases = (
 				4CD53A161797105B00F9DCF0 /* Sources */,
 				4CD53A1C1797105B00F9DCF0 /* Frameworks */,
@@ -143,9 +143,9 @@
 			);
 			dependencies = (
 			);
-			name = "parallelCalc 10.7";
+			name = "parallelCalct 10.7";
 			productName = parallelCalc;
-			productReference = 4CD53A221797105B00F9DCF0 /* parallelCalc */;
+			productReference = 4CD53A221797105B00F9DCF0 /* parallelCalct */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -169,8 +169,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4C5457131785E91B00867613 /* parallelCalc 10.6 */,
-				4CD53A151797105B00F9DCF0 /* parallelCalc 10.7 */,
+				4C5457131785E91B00867613 /* parallelCalcn 10.6 */,
+				4CD53A151797105B00F9DCF0 /* parallelCalct 10.7 */,
 			);
 		};
 /* End PBXProject section */
@@ -265,7 +265,7 @@
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libstdc++";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				PRODUCT_NAME = parallelCalc;
+				PRODUCT_NAME = parallelCalcn;
 			};
 			name = Debug;
 		};
@@ -274,7 +274,7 @@
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libstdc++";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				PRODUCT_NAME = parallelCalc;
+				PRODUCT_NAME = parallelCalcn;
 			};
 			name = Release;
 		};
@@ -283,7 +283,7 @@
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libc++";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRODUCT_NAME = parallelCalc;
+				PRODUCT_NAME = parallelCalct;
 			};
 			name = Debug;
 		};
@@ -292,7 +292,7 @@
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libc++";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRODUCT_NAME = parallelCalc;
+				PRODUCT_NAME = parallelCalct;
 			};
 			name = Release;
 		};
@@ -308,7 +308,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4C54571D1785E91B00867613 /* Build configuration list for PBXNativeTarget "parallelCalc 10.6" */ = {
+		4C54571D1785E91B00867613 /* Build configuration list for PBXNativeTarget "parallelCalcn 10.6" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4C54571E1785E91B00867613 /* Debug */,
@@ -317,7 +317,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4CD53A1F1797105B00F9DCF0 /* Build configuration list for PBXNativeTarget "parallelCalc 10.7" */ = {
+		4CD53A1F1797105B00F9DCF0 /* Build configuration list for PBXNativeTarget "parallelCalct 10.7" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4CD53A201797105B00F9DCF0 /* Debug */,

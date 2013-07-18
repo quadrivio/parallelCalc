@@ -14,7 +14,9 @@
 // Functions and parent object for running MapReduce calculations via single thread, multiple
 // threads, forked tools, and streaming Hadoop. The command-line equivalent of the calculation is: 
 //
-//      parallelCalc -start | parallelCalc -map | parallelCalc -reduce
+//      parallelCalcn -start | parallelCalcn -map | parallelCalcn -reduce
+// or
+//      parallelCalct -start | parallelCalct -map | parallelCalct -reduce
 //
 // where each tool outputs text consisting of one or more lines of the form:
 //
@@ -34,6 +36,15 @@
 #include "utils.h"
 
 using namespace std;
+
+// ========== Globals ==============================================================================
+
+#if USE_THREADS
+const string gToolName = "parallelCalct";
+#else
+
+const string gToolName = "parallelCalcn";
+#endif
 
 // ========== Classes ==============================================================================
 
@@ -113,7 +124,9 @@ int Calc::singleThreadDirect(int nrows, std::ostream& output)
 }
 
 // for debugging and testing: fork and call via command-line:
-// parallelCalc -start | parallelCalc -map | parallelCalc -reduce
+// parallelCalcn -start | parallelCalcn -map | parallelCalcn -reduce
+// or
+// parallelCalct -start | parallelCalct -map | parallelCalct -reduce
 int Calc::forkWorkers(int nrows, std::ostream& output)
 {
     int result = 0;
@@ -125,13 +138,13 @@ int Calc::forkWorkers(int nrows, std::ostream& output)
         path += string(toolPathC) + "/";
     }
 #endif
-    
+        
     // start
     string startStr;
     if (result == 0) {
         // arg list
         vector<string> args;
-        args.push_back("parallelCalc");
+        args.push_back(gToolName);
         args.push_back("-start");
         args.push_back("-n");
         ostringstream ossArg;
@@ -142,7 +155,7 @@ int Calc::forkWorkers(int nrows, std::ostream& output)
         ostringstream oss;
         ostringstream error;
         
-        result = forkPipeWait(path + "parallelCalc", args, iss, oss, error);
+        result = forkPipeWait(path + gToolName, args, iss, oss, error);
         startStr = oss.str();
         
         string errorStr = error.str();
@@ -156,14 +169,14 @@ int Calc::forkWorkers(int nrows, std::ostream& output)
     if (result == 0) {
         // arg list
         vector<string> args;
-        args.push_back("parallelCalc");
+        args.push_back(gToolName);
         args.push_back("-map");
         
         istringstream iss(startStr);
         ostringstream oss;
         ostringstream error;
         
-        result = forkPipeWait(path + "parallelCalc", args, iss, oss, error);
+        result = forkPipeWait(path + gToolName, args, iss, oss, error);
         mappedStr = oss.str();
         
         string errorStr = error.str();
@@ -177,14 +190,14 @@ int Calc::forkWorkers(int nrows, std::ostream& output)
     if (result == 0) {
         // arg list
         vector<string> args;
-        args.push_back("parallelCalc");
+        args.push_back(gToolName);
         args.push_back("-reduce");
         
         istringstream iss(mappedStr);
         ostringstream oss;
         ostringstream error;
         
-        result = forkPipeWait(path + "parallelCalc", args, iss, output, error);
+        result = forkPipeWait(path + gToolName, args, iss, output, error);
         
         string errorStr = error.str();
         if (verbose && errorStr.length() > 0) {
@@ -268,10 +281,11 @@ int callHadoop(const std::string& tempInputName,
     }
 #endif
     
-    toolPath += "/parallelCalc";
+    toolPath.append("/");
+    toolPath.append(gToolName);
 
-    string mapperCmd = quote + "parallelCalc -map" + quote;
-    string reducerCmd = quote + "parallelCalc -reduce" + quote;
+    string mapperCmd = quote + gToolName + " -map" + quote;
+    string reducerCmd = quote + gToolName + " -reduce" + quote;
     
     callTool("hadoop", hadoopPath, stdoutStr, stderrStr, verbose,
              "jar",

@@ -14,7 +14,9 @@
 // Functions and parent object for running MapReduce calculations via single thread, multiple
 // threads, forked tools, and streaming Hadoop. The command-line equivalent of the calculation is: 
 //
-//      parallelCalc -start | parallelCalc -map | parallelCalc -reduce
+//      parallelCalcn -start | parallelCalcn -map | parallelCalcn -reduce
+// or
+//      parallelCalct -start | parallelCalct -map | parallelCalct -reduce
 //
 // where each tool outputs text consisting of one or more lines of the form:
 //
@@ -64,7 +66,9 @@ public:
     virtual int singleThreadDirect(int nrows, std::ostream& output);
     
     // for debugging and testing: fork and call via command-line:
-    // parallelCalc -start | parallelCalc -map | parallelCalc -reduce
+    // parallelCalcn -start | parallelCalcn -map | parallelCalcn -reduce
+    // or
+    // parallelCalct -start | parallelCalct -map | parallelCalct -reduce
     virtual int forkWorkers(int nrows, std::ostream& output);
     
     // call parallelCalc -map and parallelCalc -reduce via Hadoop streaming
