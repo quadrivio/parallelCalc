@@ -12,12 +12,12 @@
 		4C125EC517863BA2006F7CFA /* parallelCalcn in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C5457141785E91B00867613 /* parallelCalcn */; };
 		4C327B4F17879E010073EBC7 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C327B4D17879E010073EBC7 /* utils.cpp */; };
 		4C5457181785E91B00867613 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5457171785E91B00867613 /* main.cpp */; };
+		4CC78FEF17985E90005E04A1 /* parallelCalct in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4CD53A221797105B00F9DCF0 /* parallelCalct */; };
 		4CD53A171797105B00F9DCF0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5457171785E91B00867613 /* main.cpp */; };
 		4CD53A181797105B00F9DCF0 /* sumSquare.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C125EBF178637AE006F7CFA /* sumSquare.cpp */; };
 		4CD53A191797105B00F9DCF0 /* callWithFork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C125EC2178637C8006F7CFA /* callWithFork.cpp */; };
 		4CD53A1A1797105B00F9DCF0 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C327B4D17879E010073EBC7 /* utils.cpp */; };
 		4CD53A1B1797105B00F9DCF0 /* calc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE42BE8178C5D9F0066C899 /* calc.cpp */; };
-		4CD53A1E1797105B00F9DCF0 /* parallelCalcn in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C5457141785E91B00867613 /* parallelCalcn */; };
 		4CE42BE9178C5D9F0066C899 /* calc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE42BE8178C5D9F0066C899 /* calc.cpp */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +38,7 @@
 			dstPath = $PROJECT_DIR/bin;
 			dstSubfolderSpec = 0;
 			files = (
-				4CD53A1E1797105B00F9DCF0 /* parallelCalcn in CopyFiles */,
+				4CC78FEF17985E90005E04A1 /* parallelCalct in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

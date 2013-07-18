@@ -242,10 +242,13 @@ int main (int argc, const char * argv[])
 
 void usage()
 {
-    cerr << "usage: parallelCalc [-n <nrows>] [-d <delay>] [-start | -map | -reduce";
     
 #if USE_THREADS
+    cerr << "usage: parallelCalct [-n <nrows>] [-d <delay>] [-start | -map | -reduce";
     cerr << " | -threads <nthreads>";
+    
+#else
+    cerr << "usage: parallelCalcn [-n <nrows>] [-d <delay>] [-start | -map | -reduce";
 #endif
     
 #if USE_HADOOP
