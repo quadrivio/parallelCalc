@@ -134,8 +134,8 @@ int forkPipeWait(const std::string& path, std::vector<std::string> args, std::is
                     buffer[nbytes] = '\0';
                     output << buffer;
                 }
-                
-            } while (nbytes > 0);
+            
+            } while (nbytes > 0 || (nbytes < 0 && errno == EINTR)); // keep trying if interrupted
             
             // collect from error pipe
             do {
@@ -146,9 +146,9 @@ int forkPipeWait(const std::string& path, std::vector<std::string> args, std::is
                     error << buffer;
                 }
                 
-            } while (nbytes > 0);
+            } while (nbytes > 0 || (nbytes < 0 && errno == EINTR)); // keep trying if interrupted
             
-            // done
+            // wait until done
             int status;
             int wpe;
             do {
@@ -248,3 +248,155 @@ int callTool(const std::string& toolName, const std::string& toolPath, std::stri
     return result;
 }
 
+// ========== Tests ================================================================================
+
+// component tests
+void ctest_callWithFork(int& totalPassed, int& totalFailed, bool verbose)
+{
+    int passed = 0;
+    int failed = 0;
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // forkPipeWait
+    
+    {
+        istringstream iss("foo bar\n");
+        ostringstream oss;
+        ostringstream error;
+        
+        vector<string> args;
+        args.push_back("wc");   // word count
+        
+        int result = forkPipeWait("", args, iss, oss, error);
+        string outStr = oss.str();
+        
+        istringstream issOut(outStr);
+        int lines;
+        int words;
+        int bytes;
+        issOut >> lines >> words >> bytes;
+        
+        // check for success and correct answers
+        if (result == 0 && lines == 1 && words == 2 && bytes == 8) passed++; else failed++;
+    }
+    
+    {
+        istringstream iss("");
+        ostringstream oss;
+        ostringstream error;
+        
+        vector<string> args;
+        args.push_back("ls");   // list files
+        args.push_back("/nosuchdirectoryplease");
+        
+        int result = forkPipeWait("", args, iss, oss, error);
+        string errorStr = error.str();
+        
+        // check for failure and non-empty error message
+        if (result != 0 && errorStr.length() > 0) passed++; else failed++;
+    }
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // callTool
+    
+    {
+        string outStr;
+        string errStr;
+        int result = callTool("wc", "", outStr, errStr, false, NULL);
+        
+        istringstream issOut(outStr);
+        int lines;
+        int words;
+        int bytes;
+        issOut >> lines >> words >> bytes;
+        
+        // check for success and correct answers
+        if (result == 0 && lines == 0 && words == 0 && bytes == 0) passed++; else failed++;
+    }
+    
+    {
+        string outStr;
+        string errStr;
+        int result = callTool("ls", "", outStr, errStr, false, "/nosuchdirectoryplease", NULL);
+        
+        // check for failure and non-empty error message
+        if (result != 0 && errStr.length() > 0) passed++; else failed++;
+    }
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    
+    if (verbose) {
+        cerr << "callWithFork.cpp" << "\t" << passed << " passed, " << failed << " failed" << endl;
+    }
+    
+    totalPassed += passed;
+    totalFailed += failed;
+}
+
+// code coverage
+void cover_callWithFork(bool verbose)
+{
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // forkPipeWait
+
+    // call via search path
+    string wcPath;
+    {
+        istringstream iss("");
+        ostringstream oss;
+        ostringstream error;
+        
+        vector<string> args;
+        args.push_back("which");
+        args.push_back("wc");
+        
+        forkPipeWait("", args, iss, oss, error);
+        wcPath = oss.str();
+        
+        // trim trailing newline
+        if (wcPath.length() > 0 && wcPath[wcPath.length() - 1] == '\n') {
+            wcPath = wcPath.substr(0, wcPath.length() - 1);
+        }
+        
+        if (verbose) {
+            cerr << "which wc:" << '\t' << wcPath << endl;
+        }
+    }
+    
+    // call via explicit path
+    {
+        istringstream iss("foo bar\n");
+        ostringstream oss;
+        ostringstream error;
+        
+        vector<string> args;
+        args.push_back("wc");
+        
+        forkPipeWait(wcPath, args, iss, oss, error);
+        string outStr = oss.str();
+        
+        if (verbose) {
+            cerr << "foo bar wc:" << '\t' << outStr;
+        }
+    }
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // callTool
+    
+    {
+        cerr << "logging follows:";
+        
+        string outStr;
+        string errStr;
+        callTool("wc", "", outStr, errStr, true, NULL);
+    }
+    
+    {
+        cerr << "error message follows:";
+        
+        string outStr;
+        string errStr;
+        callTool("ls", "", outStr, errStr, true, "/nosuchdirectoryplease", NULL);
+    }
+    
+}

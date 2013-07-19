@@ -11,6 +11,7 @@
 		4C125EC3178637C8006F7CFA /* callWithFork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C125EC2178637C8006F7CFA /* callWithFork.cpp */; };
 		4C125EC517863BA2006F7CFA /* parallelCalcn in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C5457141785E91B00867613 /* parallelCalcn */; };
 		4C327B4F17879E010073EBC7 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C327B4D17879E010073EBC7 /* utils.cpp */; };
+		4C4180C117987E9400DFD413 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C4180C017987E9400DFD413 /* test.cpp */; };
 		4C5457181785E91B00867613 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5457171785E91B00867613 /* main.cpp */; };
 		4CC78FEF17985E90005E04A1 /* parallelCalct in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4CD53A221797105B00F9DCF0 /* parallelCalct */; };
 		4CD53A171797105B00F9DCF0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C5457171785E91B00867613 /* main.cpp */; };
@@ -19,6 +20,7 @@
 		4CD53A1A1797105B00F9DCF0 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C327B4D17879E010073EBC7 /* utils.cpp */; };
 		4CD53A1B1797105B00F9DCF0 /* calc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE42BE8178C5D9F0066C899 /* calc.cpp */; };
 		4CE42BE9178C5D9F0066C899 /* calc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CE42BE8178C5D9F0066C899 /* calc.cpp */; };
+		4CEFD7891798AF3000707161 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C4180C017987E9400DFD413 /* test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +54,8 @@
 		4C125EC41786388F006F7CFA /* shim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shim.h; sourceTree = "<group>"; };
 		4C327B4D17879E010073EBC7 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
 		4C327B4E17879E010073EBC7 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		4C4180BE17987E8800DFD413 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		4C4180C017987E9400DFD413 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test.cpp; sourceTree = "<group>"; };
 		4C5457141785E91B00867613 /* parallelCalcn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = parallelCalcn; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C5457171785E91B00867613 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4CD53A221797105B00F9DCF0 /* parallelCalct */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = parallelCalct; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +109,8 @@
 				4C125EBF178637AE006F7CFA /* sumSquare.cpp */,
 				4C125EC1178637BC006F7CFA /* callWithFork.h */,
 				4C125EC2178637C8006F7CFA /* callWithFork.cpp */,
+				4C4180BE17987E8800DFD413 /* test.h */,
+				4C4180C017987E9400DFD413 /* test.cpp */,
 				4C327B4D17879E010073EBC7 /* utils.cpp */,
 				4C327B4E17879E010073EBC7 /* utils.h */,
 			);
@@ -185,6 +191,7 @@
 				4C125EC3178637C8006F7CFA /* callWithFork.cpp in Sources */,
 				4C327B4F17879E010073EBC7 /* utils.cpp in Sources */,
 				4CE42BE9178C5D9F0066C899 /* calc.cpp in Sources */,
+				4C4180C117987E9400DFD413 /* test.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CEFD7891798AF3000707161 /* test.cpp in Sources */,
 				4CD53A171797105B00F9DCF0 /* main.cpp in Sources */,
 				4CD53A181797105B00F9DCF0 /* sumSquare.cpp in Sources */,
 				4CD53A191797105B00F9DCF0 /* callWithFork.cpp in Sources */,

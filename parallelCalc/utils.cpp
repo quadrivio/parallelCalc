@@ -348,13 +348,14 @@ void ctest_utils(int& totalPassed, int& totalFailed, bool verbose)
     // ~~~~~~~~~~~~~~~~~~~~~~
     
     if (verbose) {
-        CERR << "utils.cpp" << "\t" << passed << " passed, " << failed << " failed" << endl;
+        CERR << "utils.cpp" << "\t\t\t" << passed << " passed, " << failed << " failed" << endl;
     }
     
     totalPassed += passed;
     totalFailed += failed;
 }
 
+// code coverage
 void cover_utils(bool verbose)
 {
     // ~~~~~~~~~~~~~~~~~~~~~~

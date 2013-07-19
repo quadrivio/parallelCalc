@@ -45,6 +45,7 @@
 #include <string>
 
 #include "sumSquare.h"
+#include "test.h"
 #include "utils.h"
 
 using namespace std;
@@ -80,6 +81,7 @@ int main (int argc, const char * argv[])
     //  -fork       test fork
     //
     //  -v          verbose
+    //  -test       run tests
     
     int status = 1;
     
@@ -89,6 +91,8 @@ int main (int argc, const char * argv[])
         
         int nrows = 10;
         int delay = 0;
+        bool nrowsFlag = false;
+        bool delayFlag = false;
         bool startFlag = false;
         bool mapFlag = false;
         bool reduceFlag = false;
@@ -96,10 +100,13 @@ int main (int argc, const char * argv[])
         int nthreads = 1;
         bool hadoopFlag = false;
         bool forkFlag = false;
+        bool testFlag = false;
+        bool verboseFlag = false;
         
         for (int index = 1; index < argc; index++) {
             if (strcmp(argv[index], "-n") == 0) {
                 nrows = atoi(argv[++index]);
+                nrowsFlag = true;
                 if (nrows <= 0 || nrows > 1000) {
                     paramError = true;
                     cerr << "-n value must be > 0 and <= 1000" << endl;
@@ -107,6 +114,7 @@ int main (int argc, const char * argv[])
                 
             } else if (strcmp(argv[index], "-d") == 0) {
                 delay = atoi(argv[++index]);
+                delayFlag = true;
                 if (delay < 0 || delay > 60000) {
                     paramError = true;
                     cerr << "-d value must be >= 0 and <= 60000" << endl;
@@ -132,6 +140,9 @@ int main (int argc, const char * argv[])
             } else if (strcmp(argv[index], "-fork") == 0) {
                 forkFlag = true;
                 
+            } else if (strcmp(argv[index], "-test") == 0) {
+                testFlag = true;
+                
 #if USE_THREADS
             } else if (strcmp(argv[index], "-threads") == 0) {
                 nthreads = atoi(argv[++index]);
@@ -146,6 +157,7 @@ int main (int argc, const char * argv[])
                 
             } else if (strcmp(argv[index], "-v") == 0) {
                 calc->setVerbose(true);
+                verboseFlag = true; 
                 
             } else {
                 printUsage = true;
@@ -166,11 +178,20 @@ int main (int argc, const char * argv[])
             cerr << "use at most one of -start -map -reduce -hadoop -threads -fork" << endl;
         }
         
+        if (testFlag && (startFlag || mapFlag || reduceFlag || threadsFlag || forkFlag ||
+                         nrowsFlag || delayFlag)) {
+            paramError = true;
+            cerr << "-test can only be combined with -hadoop or -v" << endl;
+        }
+        
         if (paramError) {
             // skip
             
         } else if (printUsage) {
             usage();
+            
+        } else if (testFlag) {
+            test(hadoopFlag, verboseFlag);
             
         } else if (atMostOne == 0) {
             // default - single-threaded calls to worker methods

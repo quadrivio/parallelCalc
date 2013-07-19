@@ -94,4 +94,12 @@ protected:
 #endif
 };
 
+// ========== Function Headers =====================================================================
+
+// component tests
+void ctest_sumSquare(int& totalPassed, int& totalFailed, bool useHadoop, bool verbose);
+
+// code coverage
+void cover_sumSquare(bool useHadoop, bool verbose);
+
 #endif

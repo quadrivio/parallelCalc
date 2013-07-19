@@ -36,4 +36,10 @@ int forkPipeWait(const std::string& path, std::vector<std::string> args, std::is
 int callTool(const std::string& toolName, const std::string& toolPath, std::string& stdoutStr, 
               std::string& stderrStr, bool logging, const char *arg, ...);
 
+// component tests
+void ctest_callWithFork(int& totalPassed, int& totalFailed, bool verbose);
+
+// code coverage
+void cover_callWithFork(bool verbose);
+
 #endif

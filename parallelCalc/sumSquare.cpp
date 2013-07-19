@@ -408,3 +408,206 @@ void SumSquare::reduce(const std::string& keyMapped,
         reducedValues.push_back(iter->second);
     }
 }
+
+
+// ========== Tests ================================================================================
+
+// component tests
+void ctest_sumSquare(int& totalPassed, int& totalFailed, bool useHadoop, bool verbose)
+{
+    int passed = 0;
+    int failed = 0;
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::startWorker
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::mapWorker
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::reduceWorker
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::singleThreadDirect
+
+    {
+        SumSquare sumSquare;
+        
+        int nrows = 10;
+        ostringstream oss;
+        int status = sumSquare.singleThreadDirect(nrows, oss);
+        string outStr = oss.str();
+        const string expected = "EVEN\t220\nODD \t165\n";
+        
+        if (status == 0 && outStr == expected) passed++; else failed++;
+    }
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::multiThread
+    
+#if USE_THREADS
+    {
+        SumSquare sumSquare;
+        
+        int nrows = 10;
+        int nthreads = 2;
+        ostringstream oss;
+        int status = sumSquare.multiThread(nrows, nthreads, oss);
+        string outStr = oss.str();
+        const string expected = "EVEN\t220\nODD \t165\n";
+        
+        if (status == 0 && outStr == expected) passed++; else failed++;
+    }
+#endif
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::start
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::mapRange
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // Calc::singleThreadWorkers
+    
+    {
+        SumSquare sumSquare;
+        
+        int nrows = 10;
+        ostringstream oss;
+        int status = sumSquare.singleThreadWorkers(nrows, oss);
+        string outStr = oss.str();
+        const string expected = "EVEN\t220\nODD \t165\n";
+        
+        if (status == 0 && outStr == expected) passed++; else failed++;
+    }
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // Calc::forkWorkers
+
+    {
+        SumSquare sumSquare;
+        
+        int nrows = 10;
+        ostringstream oss;
+        int status = sumSquare.forkWorkers(nrows, oss);
+        string outStr = oss.str();
+        const string expected = "EVEN\t220\nODD \t165\n";
+        
+        if (status == 0 && outStr == expected) passed++; else failed++;
+    }
+
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // Calc::hadoop
+    
+    if (useHadoop) {
+        SumSquare sumSquare;
+        
+        int nrows = 10;
+        ostringstream oss;
+        int status = sumSquare.hadoop(nrows, oss);
+        string outStr = oss.str();
+        const string expected = "EVEN\t220\nODD \t165\n";
+        
+        if (status == 0 && outStr == expected) passed++; else failed++;
+    }
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    
+    if (verbose) {
+        cerr << "sumSquare.cpp" << "\t\t" << passed << " passed, " << failed << " failed" << endl;
+    }
+    
+    totalPassed += passed;
+    totalFailed += failed;
+}
+
+// code coverage
+void cover_sumSquare(bool useHadoop, bool verbose)
+{
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::startWorker
+
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::mapWorker
+
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::reduceWorker
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::singleThreadDirect
+
+    {
+        SumSquare sumSquare;
+        
+        int nrows = 10;
+        ostringstream oss;
+        sumSquare.singleThreadDirect(nrows, oss);
+    }
+
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::multiThread
+    
+#if USE_THREADS
+    {
+        SumSquare sumSquare;
+        
+        int nrows = 10;
+        int nthreads = 2;
+        ostringstream oss;
+        sumSquare.multiThread(nrows, nthreads, oss);
+    }
+    
+    {
+        SumSquare sumSquare;
+        
+        int nrows = 4;
+        int nthreads = 5;
+        ostringstream oss;
+        sumSquare.multiThread(nrows, nthreads, oss);
+    }
+#endif
+
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::start
+
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // SumSquare::mapRange
+
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // Calc::singleThreadWorkers
+
+    {
+        SumSquare sumSquare;
+        
+        int nrows = 10;
+        sumSquare.setDelay(100);
+        sumSquare.setVerbose(true);
+        ostringstream oss;
+        sumSquare.singleThreadWorkers(nrows, oss);
+    }
+
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // Calc::forkWorkers
+
+    {
+        SumSquare sumSquare;
+        
+        int nrows = 10;
+        sumSquare.setVerbose(true);
+        ostringstream oss;
+        sumSquare.forkWorkers(nrows, oss);
+    }
+
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    // Calc::hadoop
+    
+    if (useHadoop) {
+        SumSquare sumSquare;
+        
+        int nrows = 10;
+        sumSquare.setVerbose(true);
+        ostringstream oss;
+        sumSquare.hadoop(nrows, oss);
+    }
+
+}
