@@ -54,6 +54,9 @@ To run the calculation via Hadoop, use `parallelCalct -n <nrows> -hadoop` or
 
 To run via multiple threads, use `parallelCalct -n <nrows> -threads <nthreads>`
 
+To run tests, use `parallelCalct -test` or `parallelCalcn -test`. Options that can be used
+with `-test` are `-v` for verbose and `-hadoop` to include calls to hadoop.
+
 These options and others can also be run directly from XCode. At the top of the XCode
 window, click parallelCalc and select Edit Scheme. Select Run parallelCalc at the left of
 the dialog box and then enter the desired options in the box labeled, "Arguments
